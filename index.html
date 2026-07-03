@@ -261,7 +261,7 @@
   .adv-card .clause-tag{border-top-color:rgba(255,255,255,.14); color:rgba(239,236,226,.5);}
 
   /* ---------- photo parallax ---------- */
-  .photo-parallax{position:relative; height:56vh; min-height:380px; max-height:600px; overflow:hidden; background:var(--ink);}
+  .photo-parallax{position:relative; height:34vh; min-height:220px; max-height:380px; overflow:hidden; background:var(--ink);}
   .photo-parallax-img{
     position:absolute; top:-8%; left:0; width:100%; height:116%;
     background-size:cover; background-position:center; background-repeat:no-repeat;
@@ -269,12 +269,9 @@
   }
   .photo-parallax-overlay{
     position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(18,32,56,.45) 0%, rgba(18,32,56,.05) 35%, rgba(18,32,56,.6) 100%);
+    background:linear-gradient(180deg, rgba(18,32,56,.25) 0%, rgba(18,32,56,0) 40%, rgba(18,32,56,.3) 100%);
   }
-  .photo-parallax-caption{position:absolute; left:0; right:0; bottom:36px; color:var(--paper);}
-  .photo-parallax-caption .eyebrow{color:var(--brass-light); margin-bottom:8px;}
-  .photo-parallax-caption p{font-family:var(--serif); font-size:clamp(18px,2.2vw,24px); font-weight:450; max-width:520px; margin:0; line-height:1.3;}
-  @media (max-width:640px){ .photo-parallax{height:46vh; min-height:320px;} }
+  @media (max-width:640px){ .photo-parallax{height:26vh; min-height:180px;} }
 
   /* ---------- secteurs ---------- */
   .sectors{background:var(--paper);}
@@ -525,10 +522,6 @@
   <section class="photo-parallax" id="photoParallax">
     <div class="photo-parallax-img" style="background-image:url('assets/apartment-interior.jpg');"></div>
     <div class="photo-parallax-overlay"></div>
-    <div class="photo-parallax-caption wrap">
-      <div class="eyebrow">Notre standard</div>
-      <p>Le niveau de finition et d'entretien que nous visons pour chaque appartement que nous gérons.</p>
-    </div>
   </section>
 
   <!-- SECTEURS -->
