@@ -260,6 +260,22 @@
   .adv-card p{font-size:14.3px; color:rgba(239,236,226,.66); line-height:1.6; margin:0;}
   .adv-card .clause-tag{border-top-color:rgba(255,255,255,.14); color:rgba(239,236,226,.5);}
 
+  /* ---------- photo parallax ---------- */
+  .photo-parallax{position:relative; height:56vh; min-height:380px; max-height:600px; overflow:hidden; background:var(--ink);}
+  .photo-parallax-img{
+    position:absolute; top:-8%; left:0; width:100%; height:116%;
+    background-size:cover; background-position:center; background-repeat:no-repeat;
+    will-change:transform;
+  }
+  .photo-parallax-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(18,32,56,.45) 0%, rgba(18,32,56,.05) 35%, rgba(18,32,56,.6) 100%);
+  }
+  .photo-parallax-caption{position:absolute; left:0; right:0; bottom:36px; color:var(--paper);}
+  .photo-parallax-caption .eyebrow{color:var(--brass-light); margin-bottom:8px;}
+  .photo-parallax-caption p{font-family:var(--serif); font-size:clamp(18px,2.2vw,24px); font-weight:450; max-width:520px; margin:0; line-height:1.3;}
+  @media (max-width:640px){ .photo-parallax{height:46vh; min-height:320px;} }
+
   /* ---------- secteurs ---------- */
   .sectors{background:var(--paper);}
   .sector-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:16px;}
@@ -505,6 +521,16 @@
     </div>
   </section>
 
+  <!-- PHOTO PARALLAX -->
+  <section class="photo-parallax" id="photoParallax">
+    <div class="photo-parallax-img" style="background-image:url('assets/apartment-interior.jpg');"></div>
+    <div class="photo-parallax-overlay"></div>
+    <div class="photo-parallax-caption wrap">
+      <div class="eyebrow">Notre standard</div>
+      <p>Le niveau de finition et d'entretien que nous visons pour chaque appartement que nous gérons.</p>
+    </div>
+  </section>
+
   <!-- SECTEURS -->
   <section class="sectors" id="secteurs">
     <div class="wrap">
@@ -723,6 +749,22 @@
     reveals.forEach(el => io.observe(el));
   } else {
     reveals.forEach(el => el.classList.add('in'));
+  }
+
+  // photo parallax
+  const parallaxSection = document.getElementById('photoParallax');
+  const parallaxImg = parallaxSection ? parallaxSection.querySelector('.photo-parallax-img') : null;
+  if (parallaxImg && !reduceMotion){
+    const updateParallax = () => {
+      const rect = parallaxSection.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (rect.bottom < 0 || rect.top > vh) return;
+      const progress = (vh - rect.top) / (vh + rect.height);
+      const shift = (progress - 0.5) * 60;
+      parallaxImg.style.transform = `translateY(${shift}px)`;
+    };
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
   }
 
   // mobile burger -> simple scroll to nav links shown as list (fallback: scroll to contact)
