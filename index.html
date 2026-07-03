@@ -320,6 +320,21 @@
   .field input:focus, .field textarea:focus{outline:2px solid var(--brass); outline-offset:1px; border-color:var(--brass);}
   .field textarea{resize:vertical; min-height:110px;}
   .form-note{font-size:12.5px; color:rgba(239,236,226,.45); margin-top:4px;}
+  .form-note.error{color:var(--brass-light);}
+
+  .form-success{
+    display:flex; flex-direction:column; align-items:flex-start; gap:12px;
+    background:var(--ink-soft); border:1px solid var(--line-dark); border-radius:var(--radius);
+    padding:34px 30px;
+    opacity:0; transform:translateY(16px); animation:heroFade .6s ease forwards;
+  }
+  .form-success[hidden]{display:none;}
+  .form-success-icon{
+    width:38px; height:38px; border-radius:50%; background:var(--forest); color:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+  }
+  .form-success h3{font-family:var(--serif); font-size:22px; font-weight:500; color:var(--paper); margin:0;}
+  .form-success p{font-size:15px; color:rgba(239,236,226,.75); line-height:1.6; margin:0;}
 
   /* ---------- footer ---------- */
   footer{background:var(--ink); border-top:1px solid rgba(255,255,255,.1); padding:36px 0;}
@@ -621,22 +636,29 @@
           <div class="v">101 rue Mademoiselle, 75015 Paris</div>
         </div>
       </div>
-      <form class="contact-form reveal" id="contactForm" action="https://formsubmit.co/contact@ec-immo.fr" method="POST">
-        <input type="hidden" name="_subject" value="Nouvelle demande — site E&amp;C IMMO">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://edmarsht.github.io/ecimmo-site/#contact">
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-        <div class="row-2">
-          <div class="field"><label for="nom">Nom</label><input id="nom" name="nom" type="text" required></div>
-          <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel"></div>
+      <div class="reveal">
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/contact@ec-immo.fr" method="POST">
+          <input type="hidden" name="_subject" value="Nouvelle demande — site E&amp;C IMMO">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://edmarsht.github.io/ecimmo-site/#contact">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="row-2">
+            <div class="field"><label for="nom">Nom</label><input id="nom" name="nom" type="text" required></div>
+            <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel"></div>
+          </div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+          <div class="field"><label for="adresse">Adresse du bien</label><input id="adresse" name="adresse" type="text" placeholder="Ville, arrondissement ou adresse complète"></div>
+          <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Type de bien, surface, disponibilité..."></textarea></div>
+          <button type="submit" class="btn btn-brass" style="justify-content:center;">Envoyer ma demande</button>
+          <div class="form-note" id="formNote">En envoyant ce formulaire, votre demande est transmise directement à contact@ec-immo.fr.</div>
+        </form>
+        <div class="form-success" id="formSuccess" hidden>
+          <div class="form-success-icon">✓</div>
+          <h3>Message envoyé</h3>
+          <p>Merci, votre demande a bien été transmise. Nous revenons vers vous sous 48h avec une proposition chiffrée.</p>
         </div>
-        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
-        <div class="field"><label for="adresse">Adresse du bien</label><input id="adresse" name="adresse" type="text" placeholder="Ville, arrondissement ou adresse complète"></div>
-        <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Type de bien, surface, disponibilité..."></textarea></div>
-        <button type="submit" class="btn btn-brass" style="justify-content:center;">Envoyer ma demande</button>
-        <div class="form-note">En envoyant ce formulaire, votre demande est transmise directement à contact@ec-immo.fr.</div>
-      </form>
+      </div>
     </div>
   </section>
 
@@ -721,6 +743,35 @@
   };
   document.getElementById('cookieAccept').addEventListener('click', () => setCookieChoice('accepted'));
   document.getElementById('cookieReject').addEventListener('click', () => setCookieChoice('rejected'));
+
+  // contact form -> AJAX submit with inline confirmation
+  const contactForm = document.getElementById('contactForm');
+  const formNote = document.getElementById('formNote');
+  const formSuccess = document.getElementById('formSuccess');
+  const formNoteDefault = formNote.textContent;
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Envoi en cours...';
+    formNote.classList.remove('error');
+    formNote.textContent = formNoteDefault;
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/contact@ec-immo.fr', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm)
+      });
+      if (!res.ok) throw new Error('Submission failed');
+      contactForm.hidden = true;
+      formSuccess.hidden = false;
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Envoyer ma demande';
+      formNote.classList.add('error');
+      formNote.textContent = "Une erreur est survenue. Merci de réessayer, ou écrivez-nous directement à contact@ec-immo.fr.";
+    }
+  });
 
 </script>
 
