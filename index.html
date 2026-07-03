@@ -325,6 +325,27 @@
   footer{background:var(--ink); border-top:1px solid rgba(255,255,255,.1); padding:36px 0;}
   footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; align-items:center;}
   footer p{font-size:12.5px; color:rgba(239,236,226,.45); margin:0; font-family:var(--mono);}
+
+  /* ---------- cookie banner ---------- */
+  .cookie-banner{
+    position:fixed; left:0; right:0; bottom:0; z-index:200;
+    background:var(--ink); border-top:1px solid var(--line-dark);
+    padding:20px 0;
+    transform:translateY(100%);
+    transition:transform .4s ease;
+  }
+  .cookie-banner.show{transform:translateY(0);}
+  .cookie-banner-inner{
+    max-width:1180px; margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .cookie-banner p{color:rgba(239,236,226,.8); font-size:14px; line-height:1.5; margin:0; max-width:640px;}
+  .cookie-actions{display:flex; gap:12px; flex-shrink:0;}
+  @media (max-width:640px){
+    .cookie-banner-inner{flex-direction:column; align-items:flex-start;}
+    .cookie-actions{width:100%;}
+    .cookie-actions .btn{flex:1; justify-content:center;}
+  }
 </style>
 </head>
 <body>
@@ -600,7 +621,12 @@
           <div class="v">101 rue Mademoiselle, 75015 Paris</div>
         </div>
       </div>
-      <form class="contact-form reveal" id="contactForm">
+      <form class="contact-form reveal" id="contactForm" action="https://formsubmit.co/contact@ec-immo.fr" method="POST">
+        <input type="hidden" name="_subject" value="Nouvelle demande — site E&amp;C IMMO">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://edmarsht.github.io/ecimmo-site/#contact">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <div class="row-2">
           <div class="field"><label for="nom">Nom</label><input id="nom" name="nom" type="text" required></div>
           <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel"></div>
@@ -609,7 +635,7 @@
         <div class="field"><label for="adresse">Adresse du bien</label><input id="adresse" name="adresse" type="text" placeholder="Ville, arrondissement ou adresse complète"></div>
         <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Type de bien, surface, disponibilité..."></textarea></div>
         <button type="submit" class="btn btn-brass" style="justify-content:center;">Envoyer ma demande</button>
-        <div class="form-note">En envoyant ce formulaire, votre messagerie s'ouvre avec les informations pré-remplies à destination de contact@ec-immo.fr.</div>
+        <div class="form-note">En envoyant ce formulaire, votre demande est transmise directement à contact@ec-immo.fr.</div>
       </form>
     </div>
   </section>
@@ -622,6 +648,16 @@
     <p>Bail civil non soumis à la loi du 6 juillet 1989, ni au statut des baux commerciaux.</p>
   </div>
 </footer>
+
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-banner-inner">
+    <p>Nous utilisons des cookies pour améliorer votre expérience sur ce site. Vous pouvez les accepter ou les refuser.</p>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn-ghost" id="cookieReject" style="padding:10px 20px; font-size:13.5px;">Refuser</button>
+      <button type="button" class="btn btn-brass" id="cookieAccept" style="padding:10px 20px; font-size:13.5px;">Accepter</button>
+    </div>
+  </div>
+</div>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -673,22 +709,19 @@
     document.getElementById('modele').scrollIntoView({behavior:'smooth'});
   });
 
-  // contact form -> mailto fallback
-  const form = document.getElementById('contactForm');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    const nom = form.nom.value, tel = form.tel.value, email = form.email.value,
-          adresse = form.adresse.value, message = form.message.value;
-    const subject = encodeURIComponent('Mise en gestion — ' + (adresse || nom));
-    const body = encodeURIComponent(
-      'Nom : ' + nom + '\n' +
-      'Téléphone : ' + tel + '\n' +
-      'Email : ' + email + '\n' +
-      'Adresse du bien : ' + adresse + '\n\n' +
-      message
-    );
-    window.location.href = 'mailto:contact@ec-immo.fr?subject=' + subject + '&body=' + body;
-  });
+  // cookie consent banner
+  const cookieBanner = document.getElementById('cookieBanner');
+  const cookieChoice = localStorage.getItem('cookie-consent');
+  if (!cookieChoice){
+    setTimeout(() => cookieBanner.classList.add('show'), 600);
+  }
+  const setCookieChoice = (value) => {
+    localStorage.setItem('cookie-consent', value);
+    cookieBanner.classList.remove('show');
+  };
+  document.getElementById('cookieAccept').addEventListener('click', () => setCookieChoice('accepted'));
+  document.getElementById('cookieReject').addEventListener('click', () => setCookieChoice('rejected'));
+
 </script>
 
 </body>
