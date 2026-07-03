@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E&C IMMO — Confiez votre appartement, gardez le loyer garanti</title>
+<meta name="description" content="E&C IMMO signe un bail civil avec vous et sous-loue votre appartement en meublé de courte durée. Loyer fixe versé chaque mois, entretien professionnel, zéro gestion de votre côté.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,450&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#122038;
+    --ink-soft:#1c2f4d;
+    --ink-softer:#233a5c;
+    --paper:#efece2;
+    --paper-2:#e7e2d3;
+    --card:#f7f5ec;
+    --text:#1a2233;
+    --slate:#5b6472;
+    --line:#d8d2bf;
+    --line-dark:#31456a;
+    --brass:#a9824c;
+    --brass-light:#cba86a;
+    --forest:#3f6c51;
+    --radius:2px;
+    --serif:'Fraunces', serif;
+    --sans:'Inter', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--text);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  /* ---------- utility ---------- */
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--brass);}
+  h1,h2,h3{font-family:var(--serif); font-weight:450; line-height:1.05; margin:0;}
+  .clause-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.03em;
+    color:var(--slate);
+    text-transform:uppercase;
+    border-top:1px solid var(--line);
+    padding-top:10px;
+    margin-top:22px;
+  }
+  .clause-tag b{color:var(--brass); font-weight:600;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--sans); font-weight:600; font-size:15px;
+    padding:14px 26px;
+    border-radius:var(--radius);
+    text-decoration:none;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-brass{background:var(--brass); color:var(--ink);}
+  .btn-brass:hover{background:var(--brass-light);}
+  .btn-ghost{background:transparent; color:var(--paper); border-color:rgba(239,236,226,.35);}
+  .btn-ghost:hover{border-color:var(--paper);}
+  .btn-dark{background:var(--ink); color:var(--paper);}
+  .btn-dark:hover{background:var(--ink-soft);}
+  section{padding:110px 0;}
+  @media (max-width:900px){ section{padding:76px 0;} }
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- nav ---------- */
+  header.site{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:22px 0;
+    transition:padding .3s ease, background .3s ease, border-color .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.site.scrolled{
+    padding:14px 0;
+    background:rgba(18,32,56,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  header.site .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .logo{
+    font-family:var(--serif); font-size:21px; color:var(--paper); letter-spacing:.01em;
+    display:flex; align-items:baseline; gap:8px; text-decoration:none;
+  }
+  .logo em{font-style:italic; color:var(--brass);}
+  nav.links{display:flex; gap:34px; align-items:center;}
+  nav.links a{
+    color:rgba(239,236,226,.78); text-decoration:none; font-size:14px; font-weight:500;
+    transition:color .2s ease;
+  }
+  nav.links a:hover{color:var(--paper);}
+  .nav-cta{display:flex; align-items:center; gap:22px;}
+  .burger{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px;}
+  .burger span{width:22px; height:2px; background:var(--paper);}
+  @media (max-width:900px){
+    nav.links{display:none;}
+    .burger{display:flex;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--ink);
+    color:var(--paper);
+    padding:190px 0 90px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 82% 12%, rgba(169,130,76,.16), transparent 45%),
+      radial-gradient(circle at 8% 90%, rgba(169,130,76,.10), transparent 50%);
+    pointer-events:none;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center; position:relative;}
+  @media (max-width:980px){ .hero-grid{grid-template-columns:1fr; gap:56px;} }
+  .hero h1{font-size:clamp(34px,4.6vw,58px); font-weight:450; letter-spacing:-.01em;}
+  .hero h1 i{font-style:italic; color:var(--brass-light);}
+  .hero p.lead{
+    font-size:18px; line-height:1.6; color:rgba(239,236,226,.82);
+    max-width:480px; margin:24px 0 36px;
+  }
+  .hero .ctas{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:44px;}
+  .hero .fineprint{font-family:var(--mono); font-size:12px; color:rgba(239,236,226,.5); letter-spacing:.03em;}
+
+  /* ledger chart signature element */
+  .ledger{
+    background:var(--ink-soft);
+    border:1px solid var(--line-dark);
+    border-radius:var(--radius);
+    padding:26px 26px 20px;
+  }
+  .ledger-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;}
+  .ledger-head .t{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:rgba(239,236,226,.55);}
+  .ledger svg{width:100%; height:auto; display:block;}
+  .ledger-legend{display:flex; gap:24px; margin-top:14px; flex-wrap:wrap;}
+  .ledger-legend span{font-family:var(--mono); font-size:11.5px; color:rgba(239,236,226,.75); display:flex; align-items:center; gap:8px;}
+  .dot{width:10px; height:10px; border-radius:50%; display:inline-block;}
+  .path-classic{stroke:rgba(239,236,226,.4); stroke-width:2; fill:none; stroke-dasharray:4 4;}
+  .path-ecimmo{stroke:var(--brass-light); stroke-width:2.5; fill:none; stroke-dasharray:900; stroke-dashoffset:900; animation:draw 2.2s ease forwards .3s;}
+  @keyframes draw{ to{stroke-dashoffset:0;} }
+  @media (prefers-reduced-motion: reduce){ .path-ecimmo{stroke-dashoffset:0; animation:none;} }
+
+  /* ---------- trust strip ---------- */
+  .stats{
+    background:var(--ink);
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:34px 0;
+  }
+  .stats .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;}
+  .stat{color:var(--paper); text-align:left;}
+  .stat .n{font-family:var(--mono); font-size:26px; color:var(--brass-light);}
+  .stat .l{font-size:12.5px; color:rgba(239,236,226,.62); margin-top:4px;}
+
+  /* ---------- modèle ---------- */
+  .model{background:var(--paper);}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,42px); margin-top:16px; letter-spacing:-.01em;}
+  .section-head p{font-size:16.5px; color:var(--slate); line-height:1.65; margin-top:16px;}
+
+  .model-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:860px){ .model-steps{grid-template-columns:1fr;} }
+  .model-step{background:var(--card); padding:38px 34px;}
+  .model-step .num{font-family:var(--mono); font-size:13px; color:var(--brass); letter-spacing:.05em;}
+  .model-step h3{font-size:21px; margin:18px 0 12px; font-weight:500;}
+  .model-step p{font-size:14.8px; color:var(--slate); line-height:1.62; margin:0;}
+
+  /* ---------- avantages ---------- */
+  .advantages{background:var(--ink); color:var(--paper);}
+  .advantages .section-head p{color:rgba(239,236,226,.68);}
+  .advantages .eyebrow{color:var(--brass-light);}
+  .adv-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,.1);}
+  @media (max-width:900px){ .adv-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .adv-grid{grid-template-columns:1fr;} }
+  .adv-card{background:var(--ink); padding:36px 30px; min-height:230px; display:flex; flex-direction:column; justify-content:space-between;}
+  .adv-card h3{font-size:19px; font-weight:500; margin:0 0 10px; color:var(--paper);}
+  .adv-card p{font-size:14.3px; color:rgba(239,236,226,.66); line-height:1.6; margin:0;}
+  .adv-card .clause-tag{border-top-color:rgba(255,255,255,.14); color:rgba(239,236,226,.5);}
+
+  /* ---------- secteurs ---------- */
+  .sectors{background:var(--paper);}
+  .sector-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:16px;}
+  @media (max-width:980px){ .sector-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .sector-grid{grid-template-columns:1fr;} }
+  .sector-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px 22px; min-height:190px; display:flex; flex-direction:column; justify-content:space-between;
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .sector-card:hover{border-color:var(--brass); transform:translateY(-3px);}
+  .sector-card svg{width:34px; height:34px; stroke:var(--brass); fill:none; stroke-width:1.4;}
+  .sector-card h4{font-family:var(--serif); font-weight:500; font-size:19px; margin:16px 0 4px;}
+  .sector-card span{font-family:var(--mono); font-size:11.5px; color:var(--slate);}
+  .sector-card.more{background:transparent; border-style:dashed; justify-content:center; align-items:flex-start;}
+
+  /* ---------- faq ---------- */
+  .faq{background:var(--ink-soft); color:var(--paper);}
+  .faq .section-head p{color:rgba(239,236,226,.68);}
+  .faq .eyebrow{color:var(--brass-light);}
+  .faq-list{border-top:1px solid rgba(255,255,255,.14);}
+  details{border-bottom:1px solid rgba(255,255,255,.14); padding:22px 0;}
+  details summary{
+    list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-family:var(--serif); font-size:19px; font-weight:450;
+  }
+  details summary::-webkit-details-marker{display:none;}
+  details summary .plus{font-family:var(--mono); font-size:20px; color:var(--brass-light); transition:transform .25s ease;}
+  details[open] summary .plus{transform:rotate(45deg);}
+  details p{font-size:15px; color:rgba(239,236,226,.72); line-height:1.7; max-width:760px; margin:16px 0 4px;}
+
+  /* ---------- equipe ---------- */
+  .team{background:var(--paper);}
+  .team-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;}
+  @media (max-width:820px){ .team-grid{grid-template-columns:1fr;} }
+  .team-copy p{font-size:16px; line-height:1.75; color:var(--slate); margin:0 0 18px;}
+  .team-people{display:flex; flex-direction:column; gap:20px;}
+  .person{background:var(--card); border:1px solid var(--line); padding:22px 24px; border-radius:var(--radius);}
+  .person .name{font-family:var(--serif); font-size:19px;}
+  .person .role{font-family:var(--mono); font-size:11.5px; color:var(--brass); text-transform:uppercase; letter-spacing:.06em; margin-top:4px;}
+
+  /* ---------- contact ---------- */
+  .contact{background:var(--ink); color:var(--paper);}
+  .contact-grid{display:grid; grid-template-columns:.95fr 1.05fr; gap:64px;}
+  @media (max-width:920px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-info p{color:rgba(239,236,226,.7); font-size:15.5px; line-height:1.7; margin:18px 0 32px; max-width:420px;}
+  .contact-detail{margin-bottom:18px;}
+  .contact-detail .l{font-family:var(--mono); font-size:11px; color:var(--brass-light); text-transform:uppercase; letter-spacing:.08em;}
+  .contact-detail .v{font-size:15.5px; margin-top:4px;}
+  form.contact-form{display:grid; gap:16px;}
+  .row-2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:520px){ .row-2{grid-template-columns:1fr;} }
+  .field label{display:block; font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:rgba(239,236,226,.55); margin-bottom:8px;}
+  .field input, .field textarea{
+    width:100%; background:var(--ink-soft); border:1px solid var(--line-dark); color:var(--paper);
+    padding:13px 14px; font-family:var(--sans); font-size:14.5px; border-radius:var(--radius);
+  }
+  .field input:focus, .field textarea:focus{outline:2px solid var(--brass); outline-offset:1px; border-color:var(--brass);}
+  .field textarea{resize:vertical; min-height:110px;}
+  .form-note{font-size:12.5px; color:rgba(239,236,226,.45); margin-top:4px;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink); border-top:1px solid rgba(255,255,255,.1); padding:36px 0;}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; align-items:center;}
+  footer p{font-size:12.5px; color:rgba(239,236,226,.45); margin:0; font-family:var(--mono);}
+</style>
+</head>
+<body>
+
+<header class="site" id="siteHeader">
+  <div class="wrap">
+    <a href="#top" class="logo">E&C <em>IMMO</em></a>
+    <nav class="links">
+      <a href="#modele">Le modèle</a>
+      <a href="#avantages">Avantages</a>
+      <a href="#secteurs">Secteurs</a>
+      <a href="#faq">Questions</a>
+      <a href="#equipe">L'équipe</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-brass" style="padding:10px 20px; font-size:13.5px;">Confier mon bien</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">SAS E&C IMMO — Bail civil &amp; sous-location professionnelle</div>
+        <h1 style="margin-top:20px;">Votre loyer versé <i>chaque mois</i>, que l'appartement soit occupé ou non.</h1>
+        <p class="lead">Nous signons un bail civil avec vous et devenons votre unique locataire. Nous exploitons ensuite votre appartement en location meublée de courte durée — vous percevez un loyer fixe, sans gérer ni voyageurs, ni ménage, ni vacance locative.</p>
+        <div class="ctas">
+          <a href="#contact" class="btn btn-brass">Estimer mon loyer</a>
+          <a href="#modele" class="btn btn-ghost">Comprendre le fonctionnement</a>
+        </div>
+        <div class="fineprint">RCS PARIS 989 829 213 — 101 RUE MADEMOISELLE, 75015 PARIS</div>
+      </div>
+
+      <div class="ledger reveal">
+        <div class="ledger-head">
+          <span class="t">Revenu perçu par le propriétaire — sur 12 mois</span>
+        </div>
+        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <line x1="40" y1="70" x2="560" y2="70" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+          <line x1="40" y1="170" x2="560" y2="170" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+          <polyline class="path-classic" points="40,70 85,70 130,172 175,172 220,70 265,70 310,70 355,150 400,150 445,70 490,70 535,172"/>
+          <polyline class="path-ecimmo" points="40,70 85,70 130,70 175,70 220,70 265,70 310,70 355,70 400,70 445,70 490,70 535,70"/>
+          <g font-family="IBM Plex Mono" font-size="10" fill="rgba(239,236,226,.4)">
+            <text x="40" y="200">J</text><text x="85" y="200">F</text><text x="130" y="200">M</text>
+            <text x="175" y="200">A</text><text x="220" y="200">M</text><text x="265" y="200">J</text>
+            <text x="310" y="200">J</text><text x="355" y="200">A</text><text x="400" y="200">S</text>
+            <text x="445" y="200">O</text><text x="490" y="200">N</text><text x="535" y="200">D</text>
+          </g>
+        </svg>
+        <div class="ledger-legend">
+          <span><i class="dot" style="background:rgba(239,236,226,.4);"></i>Location classique — revenu interrompu par la vacance</span>
+          <span><i class="dot" style="background:var(--brass-light);"></i>Loyer E&amp;C IMMO — versé le 5 de chaque mois</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="wrap">
+      <div class="stat"><div class="n">9</div><div class="l">Appartements actuellement gérés</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">Secteurs : Asnières, Pantin, Massy, Bezons</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Plateformes exploitées : Airbnb, Booking.com, Abritel</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">Seul interlocuteur, du bail à la remise des clés</div></div>
+    </div>
+  </div>
+
+  <!-- MODELE -->
+  <section class="model" id="modele">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Le modèle</div>
+        <h2>Un bail civil, pas un mandat de gestion.</h2>
+        <p>E&amp;C IMMO n'est pas une agence qui gère votre bien pour votre compte : nous en devenons locataire. La différence est fondamentale — nous portons seuls le risque locatif, et votre loyer ne dépend jamais du taux d'occupation.</p>
+      </div>
+      <div class="model-steps reveal">
+        <div class="model-step">
+          <div class="num">01 — Signature</div>
+          <h3>Un bail civil est signé entre nous</h3>
+          <p>Régi par les articles 1709 et suivants du Code civil, ce contrat vous autorise à exclure toute occupation personnelle et nous confère le droit de sous-louer, en toute transparence.</p>
+        </div>
+        <div class="model-step">
+          <div class="num">02 — Exploitation</div>
+          <h3>Nous sous-louons en meublé de courte durée</h3>
+          <p>Le logement est mis en location sur Airbnb, Booking.com et Abritel, à destination d'une clientèle d'affaires en priorité, et de voyageurs de passage en complément.</p>
+        </div>
+        <div class="model-step">
+          <div class="num">03 — Versement</div>
+          <h3>Vous percevez un loyer fixe</h3>
+          <p>Payable le 5 de chaque mois par virement, indépendamment du nombre de nuitées réalisées. La différence entre le loyer et les revenus de sous-location nous revient — c'est elle qui finance notre exploitation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVANTAGES -->
+  <section class="advantages" id="avantages">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Ce que le bail change pour vous</div>
+        <h2>Six garanties inscrites au contrat, pas à l'oral.</h2>
+        <p>Chaque avantage ci-dessous correspond à une clause du bail civil que nous vous soumettons — vous pouvez le vérifier ligne à ligne avant de signer.</p>
+      </div>
+      <div class="adv-grid reveal">
+        <div class="adv-card">
+          <div><h3>Loyer fixe, versé chaque mois</h3><p>Le montant est fixé à la signature et n'est pas révisé au renouvellement. Aucune surprise, aucune négociation annuelle.</p></div>
+          <div class="clause-tag">Clause <b>Conditions financières</b></div>
+        </div>
+        <div class="adv-card">
+          <div><h3>Vacance locative à notre charge</h3><p>Que l'appartement soit loué zéro nuit ou vingt-huit nuits dans le mois, le loyer contractuel reste dû. Le risque d'occupation nous appartient.</p></div>
+          <div class="clause-tag">Clause <b>Durée</b></div>
+        </div>
+        <div class="adv-card">
+          <div><h3>Sous-location autorisée et sécurisée</h3><p>Le bail prévoit expressément votre consentement à la sous-location commerciale — il n'y a aucune zone grise à gérer avec votre copropriété ou votre mairie.</p></div>
+          <div class="clause-tag">Clause <b>Sous-location</b></div>
+        </div>
+        <div class="adv-card">
+          <div><h3>Assurances renforcées à notre charge</h3><p>Incendie-explosion, vol, dégâts des eaux et responsabilité civile : les polices sont souscrites et justifiées chaque année par nos soins.</p></div>
+          <div class="clause-tag">Clause <b>Assurance</b></div>
+        </div>
+        <div class="adv-card">
+          <div><h3>Un seul interlocuteur, aucune gestion</h3><p>Pas de recherche de locataire, pas d'état des lieux à répéter, pas de relance d'impayé, pas de messages de voyageurs à 23h.</p></div>
+          <div class="clause-tag">Clause <b>Obligation des parties</b></div>
+        </div>
+        <div class="adv-card">
+          <div><h3>Sortie encadrée, même en cas de vente</h3><p>Vous restez libre de vendre à tout moment ; nous nous engageons à libérer les lieux à l'issue des séjours en cours, avec un préavis contractuel de trois mois.</p></div>
+          <div class="clause-tag">Clause <b>Vente du logement</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTEURS -->
+  <section class="sectors" id="secteurs">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Où nous opérons</div>
+        <h2>Un portefeuille concentré en petite couronne parisienne.</h2>
+        <p>Neuf appartements exploités à ce jour, répartis sur quatre secteurs choisis pour leur desserte et leur demande d'affaires.</p>
+      </div>
+      <div class="sector-grid reveal">
+        <div class="sector-card">
+          <svg viewBox="0 0 24 24"><path d="M2 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 19c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M12 3v9"/><path d="M8 6h8"/></svg>
+          <h4>Asnières-sur-Seine</h4>
+          <span>SECTEUR HISTORIQUE</span>
+        </div>
+        <div class="sector-card">
+          <svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="10" rx="1"/><path d="M9 19v-5h6v5"/><path d="M4 9l8-5 8 5"/></svg>
+          <h4>Pantin</h4>
+          <span>CANAL DE L'OURCQ</span>
+        </div>
+        <div class="sector-card">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="7" rx="1"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/><path d="M5 11l2-5h10l2 5"/></svg>
+          <h4>Massy</h4>
+          <span>PÔLE RER / TGV</span>
+        </div>
+        <div class="sector-card">
+          <svg viewBox="0 0 24 24"><path d="M3 17c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/><path d="M12 3v10"/><circle cx="12" cy="7" r="2"/></svg>
+          <h4>Bezons</h4>
+          <span>BOUCLE DE SEINE</span>
+        </div>
+        <div class="sector-card more">
+          <div class="eyebrow" style="margin-bottom:10px;">En expansion</div>
+          <p style="font-size:14.5px; color:var(--slate); margin:0;">Paris et la petite couronne, au fil des opportunités qualifiées par notre réseau d'agents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Questions de propriétaires</div>
+        <h2>Ce que l'on nous demande avant de signer.</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>Est-ce légal de sous-louer mon bien en location meublée de courte durée ?<span class="plus">+</span></summary>
+          <p>Oui. Le bail que nous signons vous autorise explicitement à consentir à la sous-location commerciale — ce n'est pas une omission ni une zone grise. Nous assurons ensuite les déclarations municipales requises et le respect du cadre réglementaire applicable aux meublés de tourisme, y compris ses évolutions récentes.</p>
+        </details>
+        <details>
+          <summary>Que se passe-t-il si je souhaite vendre mon appartement ?<span class="plus">+</span></summary>
+          <p>Vous restez entièrement libre de vendre à tout moment. Nous devons en être informés au moins trois mois avant l'acte notarié, délai pendant lequel nous mettons fin aux sous-locations en cours pour vous restituer le bien libre de toute occupation.</p>
+        </details>
+        <details>
+          <summary>Qui gère les impayés, dégradations ou troubles de voisinage ?<span class="plus">+</span></summary>
+          <p>Nous, exclusivement. En tant que locataire unique, nous répondons directement de la bonne tenue du logement et de la relation avec le voisinage et la copropriété — vous n'êtes jamais l'interlocuteur d'un sous-locataire.</p>
+        </details>
+        <details>
+          <summary>Quelle est la durée d'engagement, et comment sortir du contrat ?<span class="plus">+</span></summary>
+          <p>Le bail est conclu pour un an, reconductible tacitement. Vous pouvez y mettre fin à tout moment moyennant un préavis de trois mois, sans avoir à justifier de motif.</p>
+        </details>
+        <details>
+          <summary>Mon appartement reste-t-il ma résidence secondaire sur le plan fiscal ?<span class="plus">+</span></summary>
+          <p>Le bail précise que vous n'en avez plus la disposition personnelle pendant sa durée, ce qui clarifie la situation vis-à-vis de l'administration : le logement est exclusivement affecté à la location meublée de courte durée, sans usage d'habitation personnelle par vous ou par nous.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="team" id="equipe">
+    <div class="wrap team-grid">
+      <div class="team-copy reveal">
+        <div class="eyebrow">L'équipe</div>
+        <h2 style="font-size:clamp(26px,3vw,36px); margin:18px 0 22px;">Deux associés, propriétaires eux-mêmes.</h2>
+        <p>Édouard et Christopher gèrent E&amp;C IMMO au quotidien. Chacun possède et exploite ses propres appartements en location meublée — la structure que nous vous proposons est celle que nous appliquons d'abord à notre propre patrimoine.</p>
+        <p>Cette double casquette, propriétaires et exploitants, façonne la façon dont nous rédigeons nos baux : équilibrés, précis, et pensés pour durer au-delà de la première année.</p>
+      </div>
+      <div class="team-people reveal">
+        <div class="person">
+          <div class="name">Édouard Toulet</div>
+          <div class="role">Co-fondateur — SAS E&amp;C IMMO</div>
+        </div>
+        <div class="person">
+          <div class="name">Christopher Malmezac</div>
+          <div class="role">Co-fondateur — SAS E&amp;C IMMO</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-info reveal">
+        <div class="eyebrow">Confier mon bien</div>
+        <h2 style="font-size:clamp(26px,3vw,38px); margin:18px 0 0;">Parlons de votre appartement.</h2>
+        <p>Estimation du loyer, visite, calendrier de mise en exploitation : nous revenons vers vous sous 48h avec une proposition chiffrée.</p>
+        <div class="contact-detail">
+          <div class="l">Email</div>
+          <div class="v">contact@ec-immo.fr</div>
+        </div>
+        <div class="contact-detail">
+          <div class="l">Société</div>
+          <div class="v">SAS E&amp;C IMMO — RCS Paris 989 829 213</div>
+        </div>
+        <div class="contact-detail">
+          <div class="l">Siège</div>
+          <div class="v">101 rue Mademoiselle, 75015 Paris</div>
+        </div>
+      </div>
+      <form class="contact-form reveal" id="contactForm">
+        <div class="row-2">
+          <div class="field"><label for="nom">Nom</label><input id="nom" name="nom" type="text" required></div>
+          <div class="field"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel"></div>
+        </div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+        <div class="field"><label for="adresse">Adresse du bien</label><input id="adresse" name="adresse" type="text" placeholder="Ville, arrondissement ou adresse complète"></div>
+        <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Type de bien, surface, disponibilité..."></textarea></div>
+        <button type="submit" class="btn btn-brass" style="justify-content:center;">Envoyer ma demande</button>
+        <div class="form-note">En envoyant ce formulaire, votre messagerie s'ouvre avec les informations pré-remplies à destination de contact@ec-immo.fr.</div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© <span id="year"></span> SAS E&amp;C IMMO — RCS Paris 989 829 213 — 101 rue Mademoiselle, 75015 Paris</p>
+    <p>Bail civil non soumis à la loi du 6 juillet 1989, ni au statut des baux commerciaux.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // header shrink on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
+
+  // mobile burger -> simple scroll to nav links shown as list (fallback: scroll to contact)
+  const burger = document.getElementById('burger');
+  burger.addEventListener('click', () => {
+    document.getElementById('modele').scrollIntoView({behavior:'smooth'});
+  });
+
+  // contact form -> mailto fallback
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const nom = form.nom.value, tel = form.tel.value, email = form.email.value,
+          adresse = form.adresse.value, message = form.message.value;
+    const subject = encodeURIComponent('Mise en gestion — ' + (adresse || nom));
+    const body = encodeURIComponent(
+      'Nom : ' + nom + '\n' +
+      'Téléphone : ' + tel + '\n' +
+      'Email : ' + email + '\n' +
+      'Adresse du bien : ' + adresse + '\n\n' +
+      message
+    );
+    window.location.href = 'mailto:contact@ec-immo.fr?subject=' + subject + '&body=' + body;
+  });
+</script>
+
+</body>
+</html>
