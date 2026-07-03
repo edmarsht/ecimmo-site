@@ -275,7 +275,11 @@
   .advantages .eyebrow{color:var(--brass-light);}
   .adv-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,.1);}
   @media (max-width:900px){ .adv-grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:600px){ .adv-grid{grid-template-columns:1fr;} }
+  @media (max-width:600px){
+    .adv-grid{grid-template-columns:1fr;}
+    .adv-card{min-height:0; padding:24px 24px;}
+    .adv-card p{display:none;}
+  }
   .adv-card{background:var(--ink); padding:36px 30px; min-height:230px; display:flex; flex-direction:column; justify-content:space-between; transition:transform .3s ease, background .3s ease;}
   .adv-card:hover{transform:translateY(-4px); background:var(--ink-soft);}
   .adv-card h3{font-size:19px; font-weight:500; margin:0 0 10px; color:var(--paper);}
