@@ -208,11 +208,14 @@
     border-radius:var(--radius);
     padding:26px 26px 20px;
   }
-  .ledger-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;}
-  .ledger-head .t{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:rgba(239,236,226,.55);}
+  .ledger-head{display:flex; flex-direction:column; gap:7px; margin-bottom:16px;}
+  .ledger-title{font-family:var(--serif); font-size:21px; font-weight:500; color:var(--paper); letter-spacing:-.005em; line-height:1.2;}
+  .ledger-title i{font-style:italic; color:var(--brass-light);}
+  .ledger-head .t{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:rgba(239,236,226,.5);}
   .ledger svg{width:100%; height:auto; display:block;}
   .ledger-legend{display:flex; gap:24px; margin-top:14px; flex-wrap:wrap;}
   .ledger-legend span{font-family:var(--mono); font-size:11.5px; color:rgba(239,236,226,.75); display:flex; align-items:center; gap:8px;}
+  .ledger-legend span.ecimmo{color:var(--paper); font-weight:600;}
   .dot{width:10px; height:10px; border-radius:50%; display:inline-block;}
   .path-classic{stroke:rgba(239,236,226,.4); stroke-width:2; fill:none; stroke-dasharray:4 4;}
   .path-ecimmo{stroke:var(--brass-light); stroke-width:2.5; fill:none; stroke-dasharray:900; stroke-dashoffset:900; animation:draw 2.2s ease forwards .3s;}
@@ -361,6 +364,7 @@
 
       <div class="ledger reveal">
         <div class="ledger-head">
+          <div class="ledger-title">Avec nous, votre loyer tombe <i>quoi qu'il arrive</i>.</div>
           <span class="t">Revenu perçu par le propriétaire — sur 12 mois</span>
         </div>
         <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -377,7 +381,7 @@
         </svg>
         <div class="ledger-legend">
           <span><i class="dot" style="background:rgba(239,236,226,.4);"></i>Location classique — revenu interrompu par la vacance</span>
-          <span><i class="dot" style="background:var(--brass-light);"></i>Loyer E&amp;C IMMO — versé le 5 de chaque mois</span>
+          <span class="ecimmo"><i class="dot" style="background:var(--brass-light);"></i>Loyer E&amp;C IMMO — versé le 5 de chaque mois, quoi qu'il arrive</span>
         </div>
       </div>
     </div>
