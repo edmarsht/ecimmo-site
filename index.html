@@ -137,7 +137,8 @@
   .review-grid.reveal.in .review-card:nth-child(4){ transition-delay:.35s; }
   .adv-grid.reveal.in .adv-card:nth-child(5),
   .review-grid.reveal.in .review-card:nth-child(5){ transition-delay:.45s; }
-  .adv-grid.reveal.in .adv-card:nth-child(6){ transition-delay:.55s; }
+  .adv-grid.reveal.in .adv-card:nth-child(6),
+  .review-grid.reveal.in .review-card:nth-child(6){ transition-delay:.55s; }
 
   .hero-grid > div:first-child > *{
     opacity:0;
@@ -363,8 +364,14 @@
   .review-card{background:var(--card); padding:28px 26px;}
   .review-stars{color:var(--brass); font-size:14px; letter-spacing:.1em; margin-bottom:12px;}
   .review-card p{font-size:14.5px; color:var(--slate); line-height:1.65; margin:0 0 16px;}
-  .review-author{font-family:var(--mono); font-size:12px; color:var(--text); text-transform:uppercase; letter-spacing:.03em;}
-  .review-author span{display:block; color:var(--slate); text-transform:none; margin-top:3px; font-size:12.5px; letter-spacing:0;}
+  .review-author{display:flex; align-items:center; gap:12px;}
+  .review-avatar{
+    flex-shrink:0; width:36px; height:36px; border-radius:50%;
+    background:var(--brass); color:var(--ink); font-family:var(--serif); font-weight:500; font-size:15px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .review-author-info{font-family:var(--mono); font-size:12px; color:var(--text); text-transform:uppercase; letter-spacing:.03em;}
+  .review-author-info span{display:block; color:var(--slate); text-transform:none; margin-top:3px; font-size:12.5px; letter-spacing:0;}
 
   /* ---------- faq ---------- */
   .faq{background:var(--ink-soft); color:var(--paper);}
@@ -629,24 +636,6 @@
       <div class="listing-carousel-wrap reveal">
         <button class="carousel-arrow prev" id="listingPrev" aria-label="Précédent" type="button">‹</button>
         <div class="listing-carousel" id="listingCarousel">
-          <a class="listing-card" href="https://www.airbnb.fr/rooms/1565490839735865033" target="_blank" rel="noopener">
-            <div class="listing-photo" style="background-image:url('assets/listings/choisy-1.jpg');">
-              <span class="listing-badge">Coup de cœur voyageurs</span>
-            </div>
-            <div class="listing-body">
-              <div class="listing-rating">★ 4,9 · 21 avis</div>
-              <h4>Studio proche Paris, RER C à pied</h4>
-              <span>Choisy-le-Roi</span>
-            </div>
-          </a>
-          <a class="listing-card" href="https://www.airbnb.fr/rooms/1472634808727753995" target="_blank" rel="noopener">
-            <div class="listing-photo" style="background-image:url('assets/listings/bezons-1.jpg');"></div>
-            <div class="listing-body">
-              <div class="listing-rating">★ 4,9 · 39 avis</div>
-              <h4>Bel appartement moderne avec parking privé</h4>
-              <span>Bezons</span>
-            </div>
-          </a>
           <a class="listing-card" href="https://www.airbnb.fr/rooms/1307818657932065971" target="_blank" rel="noopener">
             <div class="listing-photo" style="background-image:url('assets/listings/saint-ouen-1.jpg');">
               <span class="listing-badge">Coup de cœur voyageurs</span>
@@ -655,6 +644,14 @@
               <div class="listing-rating">★ 4,85 · 110 avis</div>
               <h4>Charmant appartement proche de Montmartre</h4>
               <span>Saint-Ouen</span>
+            </div>
+          </a>
+          <a class="listing-card" href="https://www.airbnb.fr/rooms/1472626530262580623" target="_blank" rel="noopener">
+            <div class="listing-photo" style="background-image:url('assets/listings/colombes-1.jpg');"></div>
+            <div class="listing-body">
+              <div class="listing-rating">★ 4,87 · 30 avis</div>
+              <h4>Nid cosy à Colombes, calme &amp; confort</h4>
+              <span>Colombes</span>
             </div>
           </a>
           <a class="listing-card" href="https://www.airbnb.fr/rooms/1620329654911693387" target="_blank" rel="noopener">
@@ -667,6 +664,16 @@
               <span>Ivry-sur-Seine</span>
             </div>
           </a>
+          <a class="listing-card" href="https://www.airbnb.fr/rooms/1565490839735865033" target="_blank" rel="noopener">
+            <div class="listing-photo" style="background-image:url('assets/listings/choisy-1.jpg');">
+              <span class="listing-badge">Coup de cœur voyageurs</span>
+            </div>
+            <div class="listing-body">
+              <div class="listing-rating">★ 4,9 · 21 avis</div>
+              <h4>Studio proche Paris, RER C à pied</h4>
+              <span>Choisy-le-Roi</span>
+            </div>
+          </a>
           <a class="listing-card" href="https://www.airbnb.fr/rooms/1541514169272592657" target="_blank" rel="noopener">
             <div class="listing-photo" style="background-image:url('assets/listings/massy-1.jpg');">
               <span class="listing-badge">Coup de cœur voyageurs</span>
@@ -677,12 +684,12 @@
               <span>Massy</span>
             </div>
           </a>
-          <a class="listing-card" href="https://www.airbnb.fr/rooms/1472626530262580623" target="_blank" rel="noopener">
-            <div class="listing-photo" style="background-image:url('assets/listings/colombes-1.jpg');"></div>
+          <a class="listing-card" href="https://www.airbnb.fr/rooms/1472634808727753995" target="_blank" rel="noopener">
+            <div class="listing-photo" style="background-image:url('assets/listings/bezons-1.jpg');"></div>
             <div class="listing-body">
-              <div class="listing-rating">★ 4,87 · 30 avis</div>
-              <h4>Nid cosy à Colombes, calme &amp; confort</h4>
-              <span>Colombes</span>
+              <div class="listing-rating">★ 4,9 · 39 avis</div>
+              <h4>Bel appartement moderne avec parking privé</h4>
+              <span>Bezons</span>
             </div>
           </a>
           <div class="listing-card more">
@@ -705,28 +712,51 @@
       <div class="review-grid reveal">
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <p>Très beau logement, avec un service et un accueil chaleureux. Je recommande.</p>
-          <div class="review-author">Ilona <span>Choisy-le-Roi</span></div>
+          <p>Nous avons passé un excellent moment dans cet appartement, agréable, propre, bien rangé, et le linge de lit sentait très bon la lessive. Merci pour l'accueil.</p>
+          <div class="review-author">
+            <span class="review-avatar">M</span>
+            <span class="review-author-info">Marjorie<span>Saint-Ouen</span></span>
+          </div>
         </div>
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <p>Très bon appartement, fidèle à ses photos, et hôte très réactif ! Je recommande.</p>
-          <div class="review-author">Ludovic <span>Choisy-le-Roi</span></div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>Appartement très charmant au calme, à proximité des restaurants et des supermarchés. Le propriétaire, très sympathique, a donné les instructions et tout s'est parfaitement bien déroulé.</p>
-          <div class="review-author">Claudia Alexandra <span>Massy</span></div>
+          <p>Edouard était attentionné et gentil. Nous avons été accueillis avec un bon vin offert, l'endroit est proche de la gare et Colombes est magnifique ! J'y séjournerais à nouveau.</p>
+          <div class="review-author">
+            <span class="review-avatar">D</span>
+            <span class="review-author-info">Davidson<span>Colombes</span></span>
+          </div>
         </div>
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <p>Le logement était propre, confortable et parfaitement conforme à la description. La communication avec l'hôte a été très facile, avec des réponses rapides et des instructions claires.</p>
-          <div class="review-author">Amanda <span>Ivry-sur-Seine</span></div>
+          <div class="review-author">
+            <span class="review-avatar">A</span>
+            <span class="review-author-info">Amanda<span>Ivry-sur-Seine</span></span>
+          </div>
         </div>
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
-          <p>Edouard et Christopher ont été d'excellents hôtes !</p>
-          <div class="review-author">Ashish <span>Ivry-sur-Seine</span></div>
+          <p>Très beau logement, avec un service et un accueil chaleureux. Je recommande.</p>
+          <div class="review-author">
+            <span class="review-avatar">I</span>
+            <span class="review-author-info">Ilona<span>Choisy-le-Roi</span></span>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>Appartement très charmant au calme, à proximité des restaurants et des supermarchés. Le propriétaire, très sympathique, a donné les instructions et tout s'est parfaitement bien déroulé.</p>
+          <div class="review-author">
+            <span class="review-avatar">C</span>
+            <span class="review-author-info">Claudia Alexandra<span>Massy</span></span>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>Excellent séjour ! L'appartement est très agréable, spacieux, lumineux et parfaitement aéré, idéalement situé à proximité des transports. L'hôte est très réactif et attentif.</p>
+          <div class="review-author">
+            <span class="review-avatar">R</span>
+            <span class="review-author-info">Ralph Daniel<span>Bezons</span></span>
+          </div>
         </div>
       </div>
     </div>
