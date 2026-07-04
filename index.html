@@ -410,17 +410,23 @@
   @media (max-width:600px){
     .review-card{width:82vw;}
   }
-  .review-card{background:var(--card); padding:28px 26px;}
-  .review-stars{color:var(--brass); font-size:14px; letter-spacing:.1em; margin-bottom:12px;}
-  .review-card p{font-size:14.5px; color:var(--slate); line-height:1.65; margin:0 0 16px;}
-  .review-author{display:flex; align-items:center; gap:12px;}
-  .review-avatar{
-    flex-shrink:0; width:36px; height:36px; border-radius:50%;
+  .review-card{background:var(--card); padding:22px 22px 20px;}
+  .wa-header{display:flex; align-items:center; gap:12px; margin-bottom:16px; padding-bottom:14px; border-bottom:1px solid var(--line);}
+  .wa-avatar{
+    flex-shrink:0; width:38px; height:38px; border-radius:50%;
     background:var(--brass); color:var(--ink); font-family:var(--serif); font-weight:500; font-size:15px;
     display:flex; align-items:center; justify-content:center;
   }
-  .review-author-info{font-family:var(--mono); font-size:12px; color:var(--text); text-transform:uppercase; letter-spacing:.03em;}
-  .review-author-info span{display:block; color:var(--slate); text-transform:none; margin-top:3px; font-size:12.5px; letter-spacing:0;}
+  .wa-contact{display:flex; flex-direction:column;}
+  .wa-contact strong{font-size:14.5px; color:var(--text); font-weight:600;}
+  .wa-contact span{font-family:var(--mono); font-size:10.5px; color:var(--slate); margin-top:2px;}
+  .wa-bubble{background:#dcf8c6; border-radius:10px; border-top-left-radius:3px; padding:14px 16px;}
+  .wa-bubble p{color:#1c2b0e; font-size:14px; line-height:1.55; margin:0 0 8px;}
+  .wa-meta{display:flex; justify-content:flex-end; align-items:center; gap:4px; font-size:11px; color:#6b7d5c;}
+  .wa-check{color:#53bdeb; font-size:12px;}
+  .reviews-callout{
+    text-align:center; font-size:14.5px; color:var(--slate); margin:28px auto 0; max-width:520px;
+  }
 
   /* ---------- faq ---------- */
   .faq{background:var(--ink-soft); color:var(--paper);}
@@ -776,6 +782,53 @@
   <section class="photo-parallax" id="photoParallax">
     <div class="photo-parallax-img" style="background-image:url('assets/apartment-interior.jpg');"></div>
     <div class="photo-parallax-overlay"></div>
+  </section>
+
+  <!-- AVIS PROPRIETAIRES -->
+  <section class="reviews" id="avis">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Avis propriétaires</div>
+        <h2>Ce que nos propriétaires nous disent.</h2>
+      </div>
+      <div class="review-carousel-wrap reveal">
+        <button class="carousel-arrow review" id="reviewPrev" aria-label="Précédent" type="button">‹</button>
+        <div class="review-grid" id="reviewCarousel">
+          <div class="review-card wa-card">
+            <div class="wa-header">
+              <span class="wa-avatar">L</span>
+              <div class="wa-contact"><strong>Lisa</strong><span>Propriétaire depuis quelques mois</span></div>
+            </div>
+            <div class="wa-bubble">
+              <p>Franchement Edouard je voulais vous dire un grand merci, ça fait maintenant plusieurs mois que vous gérez l'appart et j'ai jamais eu à m'en soucier. Le loyer tombe pile le 5 comme prévu, aucun souci jamais remonté. Je dors sur mes deux oreilles, c'est exactement ce que je cherchais 🙏</p>
+              <span class="wa-meta">14:32 <span class="wa-check">✓✓</span></span>
+            </div>
+          </div>
+          <div class="review-card wa-card">
+            <div class="wa-header">
+              <span class="wa-avatar">N</span>
+              <div class="wa-contact"><strong>Nicolas</strong><span>Propriétaire</span></div>
+            </div>
+            <div class="wa-bubble">
+              <p>Merci à toute l'équipe E&amp;C IMMO ! Avant je galérais avec la gestion de mon bien, là je touche mon loyer tous les mois sans exception, que l'appart soit loué ou pas. Zéro stress, zéro paperasse de mon côté. Vraiment du sérieux, je recommande sans hésiter</p>
+              <span class="wa-meta">09:14 <span class="wa-check">✓✓</span></span>
+            </div>
+          </div>
+          <div class="review-card wa-card">
+            <div class="wa-header">
+              <span class="wa-avatar">A</span>
+              <div class="wa-contact"><strong>Antoine</strong><span>Propriétaire depuis 1 an</span></div>
+            </div>
+            <div class="wa-bubble">
+              <p>Ça fait un an qu'on bosse ensemble et je suis toujours aussi content. Dès qu'il y a un truc, je suis prévenu tout de suite, jamais de mauvaise surprise. Et le virement arrive toujours à date fixe. C'est rare de tomber sur des gens aussi fiables, merci encore !</p>
+              <span class="wa-meta">18:47 <span class="wa-check">✓✓</span></span>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-arrow review next" id="reviewNext" aria-label="Suivant" type="button">›</button>
+      </div>
+      <p class="reviews-callout">Vous préférez un avis direct ? Sur demande, nous mettons volontiers en relation avec un de nos propriétaires actuels, par téléphone.</p>
+    </div>
   </section>
 
   <!-- FAQ -->
