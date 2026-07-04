@@ -289,6 +289,17 @@
   .adv-card h3{font-size:19px; font-weight:500; margin:0 0 10px; color:var(--paper);}
   .adv-card p{font-size:14.3px; color:rgba(239,236,226,.66); line-height:1.6; margin:0;}
   .adv-card .clause-tag{border-top-color:rgba(255,255,255,.14); color:rgba(239,236,226,.5);}
+  .adv-cta{
+    grid-column:span 2; position:relative; overflow:hidden;
+    background-size:cover; background-position:center;
+    align-items:center; justify-content:center; text-decoration:none;
+  }
+  .adv-cta:hover{transform:translateY(-4px);}
+  .adv-cta-overlay{position:absolute; inset:0; background:rgba(18,32,56,.72);}
+  .adv-cta-content{position:relative; text-align:center; max-width:280px;}
+  .adv-cta-content h3{color:var(--paper); margin-bottom:6px;}
+  .adv-cta-content p{color:rgba(239,236,226,.75); font-size:14px; margin:0 0 18px;}
+  @media (max-width:900px){ .adv-cta{grid-column:span 1;} }
   @media (max-width:600px){
     .adv-grid{grid-template-columns:1fr; gap:10px; background:transparent;}
     .adv-card{
@@ -303,6 +314,8 @@
       border-top:none; margin-top:0; padding-top:0; flex-shrink:0;
       font-size:10px; text-align:right; max-width:90px; line-height:1.4;
     }
+    .adv-cta{flex-direction:column; padding:32px 24px; border:none;}
+    .adv-cta-content p{display:block;}
   }
 
   /* ---------- photo parallax ---------- */
@@ -633,6 +646,14 @@
           </div>
           <div class="clause-tag">Clause <b>Vente du logement</b></div>
         </div>
+        <a class="adv-card adv-cta" href="#contact" style="background-image:url('assets/listings/choisy-1.jpg');">
+          <div class="adv-cta-overlay"></div>
+          <div class="adv-cta-content">
+            <h3>Une question sur votre situation ?</h3>
+            <p>Parlons-en directement.</p>
+            <span class="btn btn-brass">Nous contacter</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
