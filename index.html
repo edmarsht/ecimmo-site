@@ -360,7 +360,15 @@
   .reviews{background:var(--paper);}
   .review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);}
   @media (max-width:900px){ .review-grid{grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:600px){ .review-grid{grid-template-columns:1fr;} }
+  @media (max-width:600px){
+    .review-grid{
+      display:flex; grid-template-columns:none; background:none;
+      overflow-x:auto; gap:12px; padding:4px 2px 10px;
+      scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+    }
+    .review-grid::-webkit-scrollbar{display:none;}
+    .review-card{scroll-snap-align:start; flex:0 0 auto; width:82vw; border-radius:var(--radius);}
+  }
   .review-card{background:var(--card); padding:28px 26px;}
   .review-stars{color:var(--brass); font-size:14px; letter-spacing:.1em; margin-bottom:12px;}
   .review-card p{font-size:14.5px; color:var(--slate); line-height:1.65; margin:0 0 16px;}
@@ -654,13 +662,13 @@
               <span>Colombes</span>
             </div>
           </a>
-          <a class="listing-card" href="https://www.airbnb.fr/rooms/1620329654911693387" target="_blank" rel="noopener">
-            <div class="listing-photo" style="background-image:url('assets/listings/ivry-1.jpg');">
+          <a class="listing-card" href="https://www.airbnb.fr/rooms/1565481855275672829" target="_blank" rel="noopener">
+            <div class="listing-photo" style="background-image:url('assets/listings/ivry-2.jpg');">
               <span class="listing-badge">Coup de cœur voyageurs</span>
             </div>
             <div class="listing-body">
-              <div class="listing-rating">★ 4,93 · 27 avis</div>
-              <h4>Design &amp; confort, appartement proche de Paris</h4>
+              <div class="listing-rating">★ 4,89 · 36 avis</div>
+              <h4>Appartement moderne proche de Paris et de la gare</h4>
               <span>Ivry-sur-Seine</span>
             </div>
           </a>
@@ -690,6 +698,16 @@
               <div class="listing-rating">★ 4,9 · 39 avis</div>
               <h4>Bel appartement moderne avec parking privé</h4>
               <span>Bezons</span>
+            </div>
+          </a>
+          <a class="listing-card" href="https://www.airbnb.fr/rooms/1620329654911693387" target="_blank" rel="noopener">
+            <div class="listing-photo" style="background-image:url('assets/listings/ivry-1.jpg');">
+              <span class="listing-badge">Coup de cœur voyageurs</span>
+            </div>
+            <div class="listing-body">
+              <div class="listing-rating">★ 4,93 · 27 avis</div>
+              <h4>Design &amp; confort, appartement proche de Paris</h4>
+              <span>Ivry-sur-Seine</span>
             </div>
           </a>
           <div class="listing-card more">
