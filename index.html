@@ -266,7 +266,14 @@
   @media (max-width:860px){ .model-steps{grid-template-columns:1fr;} }
   .model-step{background:var(--card); padding:38px 34px; transition:transform .3s ease, box-shadow .3s ease;}
   .model-step:hover{transform:translateY(-4px); box-shadow:0 14px 28px rgba(18,32,56,.1);}
-  .model-step .num{font-family:var(--mono); font-size:13px; color:var(--brass); letter-spacing:.05em;}
+  .step-number{
+    width:44px; height:44px; border-radius:50%;
+    background:var(--brass); color:var(--ink);
+    font-family:var(--serif); font-size:20px; font-weight:500;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:16px;
+  }
+  .model-step .num{font-family:var(--mono); font-size:13px; color:var(--brass); letter-spacing:.05em; text-transform:uppercase;}
   .model-step h3{font-size:21px; margin:18px 0 12px; font-weight:500;}
   .model-step p{font-size:14.8px; color:var(--slate); line-height:1.62; margin:0;}
 
@@ -547,17 +554,20 @@
       </div>
       <div class="model-steps reveal">
         <div class="model-step">
-          <div class="num">01. Signature</div>
+          <div class="step-number">1</div>
+          <div class="num">Signature</div>
           <h3>Un bail civil est signé entre nous</h3>
           <p>Régi par les articles 1709 et suivants du Code civil, ce contrat vous autorise à exclure toute occupation personnelle et nous confère le droit de sous-louer, en toute transparence.</p>
         </div>
         <div class="model-step">
-          <div class="num">02. Exploitation</div>
+          <div class="step-number">2</div>
+          <div class="num">Exploitation</div>
           <h3>Nous sous-louons en location de courte durée</h3>
           <p>Nous logeons en priorité une clientèle de professionnels en déplacement, pour des séjours réguliers. Nous complétons les périodes creuses via des plateformes de réservation comme Airbnb, avec une sélection stricte des voyageurs à chaque réservation.</p>
         </div>
         <div class="model-step">
-          <div class="num">03. Versement</div>
+          <div class="step-number">3</div>
+          <div class="num">Versement</div>
           <h3>Vous percevez un loyer fixe</h3>
           <p>Payable le 5 de chaque mois par virement, indépendamment du nombre de nuitées réalisées. La différence entre le loyer et les revenus de sous-location nous revient : c'est elle qui finance notre exploitation.</p>
         </div>
