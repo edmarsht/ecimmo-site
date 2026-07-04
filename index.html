@@ -114,31 +114,31 @@
   .reveal.in{opacity:1; transform:translateY(0);}
   .adv-grid.reveal .adv-card,
   .model-steps.reveal .model-step,
-  .review-grid.reveal .review-card,
+  .review-carousel-wrap.reveal .review-card,
   .team-people.reveal .person{
     opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;
   }
   .adv-grid.reveal.in .adv-card,
   .model-steps.reveal.in .model-step,
-  .review-grid.reveal.in .review-card,
+  .review-carousel-wrap.reveal.in .review-card,
   .team-people.reveal.in .person{ opacity:1; transform:translateY(0); }
   .adv-grid.reveal.in .adv-card:nth-child(1),
   .model-steps.reveal.in .model-step:nth-child(1),
-  .review-grid.reveal.in .review-card:nth-child(1),
+  .review-carousel-wrap.reveal.in .review-card:nth-child(1),
   .team-people.reveal.in .person:nth-child(1){ transition-delay:.05s; }
   .adv-grid.reveal.in .adv-card:nth-child(2),
   .model-steps.reveal.in .model-step:nth-child(2),
-  .review-grid.reveal.in .review-card:nth-child(2),
+  .review-carousel-wrap.reveal.in .review-card:nth-child(2),
   .team-people.reveal.in .person:nth-child(2){ transition-delay:.15s; }
   .adv-grid.reveal.in .adv-card:nth-child(3),
   .model-steps.reveal.in .model-step:nth-child(3),
-  .review-grid.reveal.in .review-card:nth-child(3){ transition-delay:.25s; }
+  .review-carousel-wrap.reveal.in .review-card:nth-child(3){ transition-delay:.25s; }
   .adv-grid.reveal.in .adv-card:nth-child(4),
-  .review-grid.reveal.in .review-card:nth-child(4){ transition-delay:.35s; }
+  .review-carousel-wrap.reveal.in .review-card:nth-child(4){ transition-delay:.35s; }
   .adv-grid.reveal.in .adv-card:nth-child(5),
-  .review-grid.reveal.in .review-card:nth-child(5){ transition-delay:.45s; }
+  .review-carousel-wrap.reveal.in .review-card:nth-child(5){ transition-delay:.45s; }
   .adv-grid.reveal.in .adv-card:nth-child(6),
-  .review-grid.reveal.in .review-card:nth-child(6){ transition-delay:.55s; }
+  .review-carousel-wrap.reveal.in .review-card:nth-child(6){ transition-delay:.55s; }
 
   .hero-grid > div:first-child > *{
     opacity:0;
@@ -365,16 +365,19 @@
 
   /* ---------- avis ---------- */
   .reviews{background:var(--paper);}
-  .review-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);}
-  @media (max-width:900px){ .review-grid{grid-template-columns:repeat(2,1fr);} }
+  .review-carousel-wrap{display:flex; align-items:center; gap:14px;}
+  .review-grid{
+    display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:4px 2px 10px;
+  }
+  .review-grid::-webkit-scrollbar{display:none;}
+  .review-card{
+    scroll-snap-align:start; flex:0 0 auto; width:calc((100% - 32px) / 3);
+    border-radius:var(--radius);
+  }
+  @media (max-width:900px){ .review-card{width:calc((100% - 16px) / 2);} }
   @media (max-width:600px){
-    .review-grid{
-      display:flex; grid-template-columns:none; background:none;
-      overflow-x:auto; gap:12px; padding:4px 2px 10px;
-      scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; scrollbar-width:none;
-    }
-    .review-grid::-webkit-scrollbar{display:none;}
-    .review-card{scroll-snap-align:start; flex:0 0 auto; width:82vw; border-radius:var(--radius);}
+    .review-card{width:82vw;}
   }
   .review-card{background:var(--card); padding:28px 26px;}
   .review-stars{color:var(--brass); font-size:14px; letter-spacing:.1em; margin-bottom:12px;}
@@ -734,7 +737,9 @@
         <div class="eyebrow">Avis voyageurs</div>
         <h2>Ce qu'on nous dit après le séjour.</h2>
       </div>
-      <div class="review-grid reveal">
+      <div class="review-carousel-wrap reveal">
+        <button class="carousel-arrow review" id="reviewPrev" aria-label="Précédent" type="button">‹</button>
+        <div class="review-grid" id="reviewCarousel">
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <p>Nous avons passé un excellent moment dans cet appartement, agréable, propre, bien rangé, et le linge de lit sentait très bon la lessive. Merci pour l'accueil.</p>
@@ -783,6 +788,8 @@
             <span class="review-author-info">Ralph Daniel<span>Bezons</span></span>
           </div>
         </div>
+        </div>
+        <button class="carousel-arrow review next" id="reviewNext" aria-label="Suivant" type="button">›</button>
       </div>
     </div>
   </section>
@@ -988,6 +995,20 @@
     };
     listingPrev.addEventListener('click', () => scrollByCard(-1));
     listingNext.addEventListener('click', () => scrollByCard(1));
+  }
+
+  // review carousel arrows
+  const reviewCarousel = document.getElementById('reviewCarousel');
+  const reviewPrev = document.getElementById('reviewPrev');
+  const reviewNext = document.getElementById('reviewNext');
+  if (reviewCarousel && reviewPrev && reviewNext){
+    const scrollByReview = (dir) => {
+      const card = reviewCarousel.querySelector('.review-card');
+      const distance = card ? card.getBoundingClientRect().width + 16 : 320;
+      reviewCarousel.scrollBy({ left: dir * distance, behavior: 'smooth' });
+    };
+    reviewPrev.addEventListener('click', () => scrollByReview(-1));
+    reviewNext.addEventListener('click', () => scrollByReview(1));
   }
 
   // cookie consent banner
