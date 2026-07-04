@@ -187,11 +187,29 @@
   nav.links a:hover{color:var(--paper);}
   nav.links a:hover::after{ transform:scaleX(1); transform-origin:left; }
   .nav-cta{display:flex; align-items:center; gap:22px;}
-  .burger{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px;}
-  .burger span{width:22px; height:2px; background:var(--paper);}
+  .burger{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px; z-index:101; position:relative;}
+  .burger span{width:22px; height:2px; background:var(--paper); transition:transform .3s ease, opacity .3s ease;}
+  .burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.active span:nth-child(2){opacity:0;}
+  .burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-nav{
+    display:none; position:fixed; top:0; left:0; right:0; z-index:99;
+    background:var(--ink); border-bottom:1px solid rgba(255,255,255,.08);
+    padding:90px 32px 28px; flex-direction:column; gap:2px;
+    transform:translateY(-100%); transition:transform .35s ease;
+    max-height:100vh; overflow-y:auto;
+  }
+  .mobile-nav a{
+    color:rgba(239,236,226,.85); text-decoration:none; font-size:16px; font-weight:500;
+    padding:15px 0; border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .mobile-nav a:last-of-type{border-bottom:none;}
+  .mobile-nav .btn{margin-top:14px; justify-content:center;}
   @media (max-width:900px){
     nav.links{display:none;}
     .burger{display:flex;}
+    .mobile-nav{display:flex;}
+    .mobile-nav.open{transform:translateY(0);}
   }
 
   /* ---------- hero ---------- */
@@ -509,6 +527,15 @@
     </div>
   </div>
 </header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#modele">Le modèle</a>
+  <a href="#avantages">Avantages</a>
+  <a href="#secteurs">Secteurs</a>
+  <a href="#faq">Questions</a>
+  <a href="#equipe">L'équipe</a>
+  <a href="#contact" class="btn btn-brass">Confier mon bien</a>
+</nav>
 
 <main id="top">
 
@@ -1030,10 +1057,18 @@
     updateParallax();
   }
 
-  // mobile burger -> simple scroll to nav links shown as list (fallback: scroll to contact)
+  // mobile burger -> toggle dropdown menu
   const burger = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobileNav');
   burger.addEventListener('click', () => {
-    document.getElementById('modele').scrollIntoView({behavior:'smooth'});
+    const isOpen = mobileNav.classList.toggle('open');
+    burger.classList.toggle('active', isOpen);
+  });
+  mobileNav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      burger.classList.remove('active');
+    });
   });
 
   // listing carousel arrows
