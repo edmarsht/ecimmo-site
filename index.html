@@ -140,18 +140,18 @@
   .adv-grid.reveal.in .adv-card:nth-child(6),
   .review-carousel-wrap.reveal.in .review-card:nth-child(6){ transition-delay:.55s; }
 
-  .hero-grid > div:first-child > *{
+  .hero-content > *{
     opacity:0;
     animation:heroFade .8s ease forwards;
   }
-  .hero-grid > div:first-child > *:nth-child(1){animation-delay:.1s;}
-  .hero-grid > div:first-child > *:nth-child(2){animation-delay:.25s;}
-  .hero-grid > div:first-child > *:nth-child(3){animation-delay:.4s;}
-  .hero-grid > div:first-child > *:nth-child(4){animation-delay:.55s;}
-  .hero-grid > div:first-child > *:nth-child(5){animation-delay:.7s;}
+  .hero-content > *:nth-child(1){animation-delay:.1s;}
+  .hero-content > *:nth-child(2){animation-delay:.25s;}
+  .hero-content > *:nth-child(3){animation-delay:.4s;}
+  .hero-content > *:nth-child(4){animation-delay:.55s;}
+  .hero-content > *:nth-child(5){animation-delay:.7s;}
   @keyframes heroFade{ from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
   @media (prefers-reduced-motion: reduce){
-    .hero-grid > div:first-child > *{ animation:none; opacity:1; }
+    .hero-content > *{ animation:none; opacity:1; }
   }
 
   /* ---------- nav ---------- */
@@ -214,22 +214,24 @@
 
   /* ---------- hero ---------- */
   .hero{
-    background:var(--ink);
     color:var(--paper);
-    padding:190px 0 90px;
     position:relative;
     overflow:hidden;
   }
-  .hero::before{
-    content:"";
-    position:absolute; inset:0;
-    background:
-      radial-gradient(circle at 82% 12%, rgba(169,130,76,.16), transparent 45%),
-      radial-gradient(circle at 8% 90%, rgba(169,130,76,.10), transparent 50%);
-    pointer-events:none;
+  .hero-bg-img{
+    position:absolute; top:-8%; left:0; width:100%; height:116%;
+    background-size:cover; background-position:center; background-repeat:no-repeat;
+    z-index:0; will-change:transform;
   }
-  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:64px; align-items:center; position:relative;}
-  @media (max-width:980px){ .hero-grid{grid-template-columns:1fr; gap:56px;} }
+  .hero-bg-overlay{
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:
+      radial-gradient(circle at 82% 12%, rgba(169,130,76,.18), transparent 45%),
+      radial-gradient(circle at 8% 90%, rgba(169,130,76,.12), transparent 50%),
+      linear-gradient(180deg, rgba(18,32,56,.82) 0%, rgba(18,32,56,.72) 55%, rgba(18,32,56,.9) 100%);
+  }
+  .hero > .wrap{position:relative; z-index:2;}
+  .hero-content{max-width:640px; padding:190px 0 90px;}
   .hero h1{font-size:clamp(34px,4.6vw,58px); font-weight:450; letter-spacing:-.01em;}
   .hero h1 i{font-style:italic; color:var(--brass-light);}
   .hero p.lead{
@@ -242,31 +244,10 @@
   @media (prefers-reduced-motion: reduce){ .hero .ctas .btn-brass{animation:none; opacity:1;} }
   .hero .fineprint{font-family:var(--mono); font-size:12px; color:rgba(239,236,226,.5); letter-spacing:.03em;}
 
-  /* ledger chart signature element */
-  .ledger{
-    background:var(--ink-soft);
-    border:1px solid var(--line-dark);
-    border-radius:var(--radius);
-    padding:26px 26px 20px;
-  }
-  .ledger-head{display:flex; flex-direction:column; gap:7px; margin-bottom:16px;}
-  .ledger-title{font-family:var(--serif); font-size:21px; font-weight:500; color:var(--paper); letter-spacing:-.005em; line-height:1.2;}
-  .ledger-title i{font-style:italic; color:var(--brass-light);}
-  .ledger-head .t{font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:rgba(239,236,226,.5);}
-  .ledger svg{width:100%; height:auto; display:block;}
-  .ledger-legend{display:flex; gap:24px; margin-top:14px; flex-wrap:wrap;}
-  .ledger-legend span{font-family:var(--mono); font-size:11.5px; color:rgba(239,236,226,.75); display:flex; align-items:center; gap:8px;}
-  .ledger-legend span.ecimmo{color:var(--paper); font-weight:600;}
-  .dot{width:10px; height:10px; border-radius:50%; display:inline-block;}
-  .path-classic{stroke:rgba(239,236,226,.4); stroke-width:2; fill:none; stroke-dasharray:4 4;}
-  .path-ecimmo{stroke:var(--brass-light); stroke-width:2.5; fill:none; stroke-dasharray:900; stroke-dashoffset:900; animation:draw 2.2s ease forwards .3s;}
-  @keyframes draw{ to{stroke-dashoffset:0;} }
-  @media (prefers-reduced-motion: reduce){ .path-ecimmo{stroke-dashoffset:0; animation:none;} }
-
   /* ---------- trust strip ---------- */
   .stats{
-    background:var(--ink);
-    border-top:1px solid rgba(255,255,255,.08);
+    position:relative; z-index:2;
+    border-top:1px solid rgba(255,255,255,.14);
     padding:34px 0;
   }
   .stats .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;}
@@ -546,9 +527,11 @@
 <main id="top">
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
+  <section class="hero" id="heroSection">
+    <div class="hero-bg-img" style="background-image:url('assets/listings/bezons-1.jpg');"></div>
+    <div class="hero-bg-overlay"></div>
+    <div class="wrap">
+      <div class="hero-content">
         <div class="eyebrow">SAS E&C IMMO, sous-location professionnelle</div>
         <h1 style="margin-top:20px;">On s'occupe de votre appartement. Vous touchez votre loyer <i>chaque mois</i>, que l'appartement soit occupé ou non.</h1>
         <p class="lead">Nous devenons l'unique locataire de votre appartement, l'entretenons avec des équipes professionnelles et vous versons un loyer fixe chaque mois, que le logement soit occupé ou non, sans gérer ni voyageurs, ni ménage, ni impayés.</p>
@@ -558,40 +541,17 @@
         </div>
         <div class="fineprint">RCS PARIS 989 829 213, 101 RUE MADEMOISELLE, 75015 PARIS</div>
       </div>
+    </div>
 
-      <div class="ledger reveal">
-        <div class="ledger-head">
-          <div class="ledger-title">Avec nous, votre loyer <i>ne s'arrête jamais</i>.</div>
-          <span class="t">Revenu perçu par le propriétaire sur 12 mois</span>
-        </div>
-        <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <line x1="40" y1="70" x2="560" y2="70" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-          <line x1="40" y1="170" x2="560" y2="170" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
-          <polyline class="path-classic" points="40,70 85,70 130,172 175,172 220,70 265,70 310,70 355,150 400,150 445,70 490,70 535,172"/>
-          <polyline class="path-ecimmo" points="40,70 85,70 130,70 175,70 220,70 265,70 310,70 355,70 400,70 445,70 490,70 535,70"/>
-          <g font-family="IBM Plex Mono" font-size="10" fill="rgba(239,236,226,.4)">
-            <text x="40" y="200">J</text><text x="85" y="200">F</text><text x="130" y="200">M</text>
-            <text x="175" y="200">A</text><text x="220" y="200">M</text><text x="265" y="200">J</text>
-            <text x="310" y="200">J</text><text x="355" y="200">A</text><text x="400" y="200">S</text>
-            <text x="445" y="200">O</text><text x="490" y="200">N</text><text x="535" y="200">D</text>
-          </g>
-        </svg>
-        <div class="ledger-legend">
-          <span><i class="dot" style="background:rgba(239,236,226,.4);"></i>Location classique : revenu interrompu par les changements de locataire et le risque d'impayé</span>
-          <span class="ecimmo"><i class="dot" style="background:var(--brass-light);"></i>Loyer E&amp;C IMMO : versé le 5 de chaque mois, sans interruption</span>
-        </div>
+    <!-- STATS -->
+    <div class="stats">
+      <div class="wrap">
+        <div class="stat"><div class="n" data-count="16">0</div><div class="l">Appartements actuellement gérés</div></div>
+        <div class="stat"><div class="n" data-count="8">0</div><div class="l">Secteurs actifs en petite couronne parisienne</div></div>
+        <div class="stat"><div class="n" data-count="1">0</div><div class="l">Seul interlocuteur, du bail à la remise des clés</div></div>
       </div>
     </div>
   </section>
-
-  <!-- STATS -->
-  <div class="stats">
-    <div class="wrap">
-      <div class="stat"><div class="n" data-count="16">0</div><div class="l">Appartements actuellement gérés</div></div>
-      <div class="stat"><div class="n" data-count="8">0</div><div class="l">Secteurs actifs en petite couronne parisienne</div></div>
-      <div class="stat"><div class="n" data-count="1">0</div><div class="l">Seul interlocuteur, du bail à la remise des clés</div></div>
-    </div>
-  </div>
 
   <!-- MODELE -->
   <section class="model" id="modele">
@@ -998,17 +958,21 @@
     reveals.forEach(el => el.classList.add('in'));
   }
 
-  // photo parallax
-  const parallaxSection = document.getElementById('photoParallax');
-  const parallaxImg = parallaxSection ? parallaxSection.querySelector('.photo-parallax-img') : null;
-  if (parallaxImg && !reduceMotion){
+  // scroll parallax (hero background + mid-page photo)
+  const parallaxTargets = [
+    { section: document.getElementById('heroSection'), img: document.querySelector('#heroSection .hero-bg-img') },
+    { section: document.getElementById('photoParallax'), img: document.querySelector('#photoParallax .photo-parallax-img') },
+  ].filter(t => t.section && t.img);
+  if (parallaxTargets.length && !reduceMotion){
     const updateParallax = () => {
-      const rect = parallaxSection.getBoundingClientRect();
       const vh = window.innerHeight;
-      if (rect.bottom < 0 || rect.top > vh) return;
-      const progress = (vh - rect.top) / (vh + rect.height);
-      const shift = (progress - 0.5) * 60;
-      parallaxImg.style.transform = `translateY(${shift}px)`;
+      parallaxTargets.forEach(({ section, img }) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > vh) return;
+        const progress = (vh - rect.top) / (vh + rect.height);
+        const shift = (progress - 0.5) * 60;
+        img.style.transform = `translateY(${shift}px)`;
+      });
     };
     window.addEventListener('scroll', updateParallax, { passive: true });
     updateParallax();
