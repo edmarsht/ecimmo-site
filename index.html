@@ -246,8 +246,8 @@
 
   /* ---------- trust strip ---------- */
   .stats{
-    position:relative; z-index:2;
-    border-top:1px solid rgba(255,255,255,.14);
+    background:var(--ink);
+    border-top:1px solid rgba(255,255,255,.08);
     padding:34px 0;
   }
   .stats .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px;}
@@ -528,7 +528,7 @@
 
   <!-- HERO -->
   <section class="hero" id="heroSection">
-    <div class="hero-bg-img" style="background-image:url('assets/listings/bezons-1.jpg');"></div>
+    <div class="hero-bg-img" style="background-image:url('assets/hero-photo.jpg');"></div>
     <div class="hero-bg-overlay"></div>
     <div class="wrap">
       <div class="hero-content">
@@ -542,16 +542,16 @@
         <div class="fineprint">RCS PARIS 989 829 213, 101 RUE MADEMOISELLE, 75015 PARIS</div>
       </div>
     </div>
-
-    <!-- STATS -->
-    <div class="stats">
-      <div class="wrap">
-        <div class="stat"><div class="n" data-count="16">0</div><div class="l">Appartements actuellement gérés</div></div>
-        <div class="stat"><div class="n" data-count="8">0</div><div class="l">Secteurs actifs en petite couronne parisienne</div></div>
-        <div class="stat"><div class="n" data-count="1">0</div><div class="l">Seul interlocuteur, du bail à la remise des clés</div></div>
-      </div>
-    </div>
   </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="wrap">
+      <div class="stat"><div class="n" data-count="16">0</div><div class="l">Appartements actuellement gérés</div></div>
+      <div class="stat"><div class="n" data-count="8">0</div><div class="l">Secteurs actifs en petite couronne parisienne</div></div>
+      <div class="stat"><div class="n" data-count="1">0</div><div class="l">Seul interlocuteur, du bail à la remise des clés</div></div>
+    </div>
+  </div>
 
   <!-- MODELE -->
   <section class="model" id="modele">
