@@ -1,0 +1,13 @@
+<svg width="500" height="160" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow1" cx="82%" cy="12%" r="65%">
+      <stop offset="0%" stop-color="#a9824c" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#a9824c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="500" height="160" fill="#122038"/>
+  <rect x="0" y="0" width="500" height="160" fill="url(#glow1)"/>
+  <text x="250" y="90" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="52" font-weight="500" fill="#efece2">E&amp;C <tspan font-style="italic" fill="#cba86a">IMMO</tspan></text>
+  <line x1="205" y1="108" x2="295" y2="108" stroke="#a9824c" stroke-width="1.4"/>
+  <text x="250" y="128" text-anchor="middle" font-family="IBM Plex Mono, Courier New, monospace" font-size="12" letter-spacing="3" fill="#cba86a">SOUS-LOCATION PROFESSIONNELLE</text>
+</svg>
