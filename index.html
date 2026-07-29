@@ -184,6 +184,7 @@
   nav.links a:hover{color:var(--paper);}
   nav.links a:hover::after{ transform:scaleX(1); transform-origin:left; }
   .nav-cta{display:flex; align-items:center; gap:22px;}
+  .nav-cta-btn{padding:10px 20px; font-size:13.5px;}
   .burger{display:none; flex-direction:column; gap:5px; background:none; border:0; cursor:pointer; padding:6px; z-index:101; position:relative;}
   .burger span{width:22px; height:2px; background:var(--paper); transition:transform .3s ease, opacity .3s ease;}
   .burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
@@ -207,6 +208,13 @@
     .burger{display:flex;}
     .mobile-nav{display:flex;}
     .mobile-nav.open{transform:translateY(0);}
+  }
+  @media (max-width:640px){
+    header.site{padding:16px 0;}
+    header.site.scrolled{padding:10px 0;}
+    .logo img{height:18px;}
+    .nav-cta{gap:12px;}
+    .nav-cta-btn{padding:8px 14px; font-size:12px;}
   }
 
   /* ---------- hero ---------- */
@@ -510,7 +518,7 @@
       <a href="#equipe">L'équipe</a>
     </nav>
     <div class="nav-cta">
-      <a href="#contact" class="btn btn-brass" style="padding:10px 20px; font-size:13.5px;">Confier mon bien</a>
+      <a href="#contact" class="btn btn-brass nav-cta-btn">Confier mon bien</a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
